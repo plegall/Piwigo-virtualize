@@ -1,0 +1,1 @@
+Wandelt physische Kategorien in virtuelle um und verschiebt die Fotos von "galleries" nach "upload"
