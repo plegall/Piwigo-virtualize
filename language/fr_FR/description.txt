@@ -1,0 +1,1 @@
+Rend les catégories virtuelles et déplace les photos de "galleries" vers "upload"

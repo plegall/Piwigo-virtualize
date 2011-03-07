@@ -1,0 +1,1 @@
+Make categories virtual and move photos from "galleries" to "upload"
