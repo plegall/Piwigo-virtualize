@@ -1,0 +1,1 @@
+Establece las categorías virtuales y mueve las fotos del directorio "galleries" a "upload"
