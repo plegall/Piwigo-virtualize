@@ -1,0 +1,1 @@
+Kategóriák virtuálissá tétele, valamint képek áthelyezése a "galleries" könyvtárból az "upload" könyvtárba
