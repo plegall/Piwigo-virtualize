@@ -1,0 +1,1 @@
+Padarīt kategorijas par virtuālām un pārvietot fotogrāfijas no "galleries" uz "upload"
