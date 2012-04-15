@@ -1,0 +1,1 @@
+Převede fyzick&eacute; kategorie na virtualn&iacute; a přemist&iacute; v&scaron;echny fotky z adres&aacute;ře "galleries" (z&aacute;nik jednotliv&yacute;ch fyzick&yacute;ch adres&aacute;řů alb) do adres&aacute;ře "upload" (bez adres&aacute;řov&eacute; struktury, virtualn&iacute; struktura uchov&aacute;na pouze v datab&aacute;zy).
