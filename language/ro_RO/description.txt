@@ -1,0 +1,1 @@
+Virtualizează categoriile și mută imaginile din "galerii" &icirc;n "upload".
