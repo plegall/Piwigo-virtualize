@@ -23,5 +23,5 @@
 $lang['Make sure you have a backup of your <em>"galleries"</em> directory and a dump of your database.'] = 'Βεβαιωθείτε ότι έχετε ένα αντίγραφο ασφαλείας των <em>"γκαλερί"</em> καταλόγων σας και ένα αποτύπωση της βάσης δεδομένων σας.';
 $lang['Once categories are virtual, you can move them the way you want.'] = 'Μόλις κατηγορίες αυτές γίνουν εικονικές, μπορείτε να τις μετακινήσετε όπου θέλετε.';
 $lang['Start to virtualize'] = 'Ξεκινήστε να εικονοποίηση';
-$lang['This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.'] = 'Αυτό το πρόσθετο κινεί όλες τις φωτογραφίες σας από το <em>"γκαλερί"</em> (που προστίθεται με τη διαδικασία συγχρονισμού) για να <em>"ανεβάσματος"</em> και σημαδεύει τις κατηγορίες ως εικονικές (virtual).';
+$lang['This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.'] = 'Αυτό το πρόσθετο μετακινεί όλες τις φωτογραφίες σας από το <em>"γκαλερί"</em> (που προστίθεται με τη διαδικασία συγχρονισμού) στο <em>"ανέβασμα"</em> και μαρκάρει τις κατηγορίες ως εικονικές (virtual).';
 ?>
