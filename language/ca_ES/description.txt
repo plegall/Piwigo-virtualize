@@ -1,1 +1,1 @@
-Permet fer virtuals &agrave;lbums f&iacute;sics i moure imatges del directori "galleries" al directori "upload".
+Permet fer virtuals àlbums físics i moure imatges del directori "galleries" al directori "upload".
