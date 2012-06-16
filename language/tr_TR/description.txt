@@ -1,0 +1,1 @@
+Kategorileri sanal yapar ve fotoğrafları "Galeriler" 'den "Yüklemeler" 'e taşır.
