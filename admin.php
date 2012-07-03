@@ -76,7 +76,15 @@ SELECT
     }
     secure_directory($upload_dir);
 
-    $newfilename = $year.$month.$day.$hour.$minute.$second.'-'.substr($md5sum, 0, 8).'.jpg';
+    $extension = get_extension($row['oldpath']);
+    if (in_array($extension, array('vimeo', 'ytube', 'dm')))
+    {
+      $newfilename = basename($row['oldpath']);
+    }
+    else
+    {
+      $newfilename = $year.$month.$day.$hour.$minute.$second.'-'.substr($md5sum, 0, 8).'.jpg';
+    }
 
     $newpath = $upload_dir.'/'.$newfilename;
 
@@ -113,28 +121,30 @@ UPDATE '.IMAGES_TABLE.'
     }
 
     # thumbnail
-    $tn_dir = $upload_dir.'/thumbnail';
-
-    if (!is_dir($tn_dir))
+    if (!empty($row['tn_ext']))
     {
-      umask(0000);
-      $recursive = true;
-      if (!@mkdir($tn_dir, 0777, $recursive))
+      $tn_dir = $upload_dir.'/thumbnail';
+      
+      if (!is_dir($tn_dir))
       {
-        echo 'error during "'.$tn_dir.'" directory creation';
-        exit();
+        umask(0000);
+        $recursive = true;
+        if (!@mkdir($tn_dir, 0777, $recursive))
+        {
+          echo 'error during "'.$tn_dir.'" directory creation';
+          exit();
+        }
       }
+      
+      $tn_oldname = $conf['prefix_thumbnail'];
+      $tn_oldname.= get_filename_wo_extension(basename($row['oldpath']));
+      $tn_oldname.= '.'.$row['tn_ext'];
+      
+      rename(
+        dirname($row['oldpath']).'/thumbnail/'.$tn_oldname,
+        $tn_dir.'/'.$conf['prefix_thumbnail'].get_filename_wo_extension(basename($newfilename)).'.jpg'
+        );
     }
-
-    $tn_oldname = $conf['prefix_thumbnail'];
-    $tn_oldname.= get_filename_wo_extension(basename($row['oldpath']));
-    $tn_oldname.= '.'.$row['tn_ext'];
-    
-    rename(
-      dirname($row['oldpath']).'/thumbnail/'.$tn_oldname,
-      $tn_dir.'/'.$conf['prefix_thumbnail'].$newfilename
-      );
-    
     // break;
   }
 
