@@ -20,8 +20,8 @@
 // | Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, |
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
-$lang['Make sure you have a backup of your <em>"galleries"</em> directory and a dump of your database.'] = 'Переконайтеся, що у Вас є резервна копія <em>"галереї"</em> і дамп бази даних.';
+$lang['Make sure you have a backup of your <em>"galleries"</em> directory and a dump of your database.'] = 'Переконайтеся, що у Вас є резервна копія <em>"galleries"</em> і дамп бази даних.';
 $lang['Once categories are virtual, you can move them the way you want.'] = 'Якщо категорія є віртуальною, то ви можете перемістити їх так, як забажаєте.';
 $lang['Start to virtualize'] = 'Почати віртуалізацію';
-$lang['This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.'] = 'Цей плагін переміщує всі зображення з <em>"галереї"</em> (додані з процесу синхронізації) до <em>"Завантажити"<em> і відзначають категорії, як віртуальний.';
+$lang['This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.'] = 'Цей плагін переміщує всі зображення з <em>"galleries"</em> (додані з процесу синхронізації) до <em>"upload"</em> і відзначають категорії, як віртуальний.';
 ?>
