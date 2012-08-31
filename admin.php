@@ -45,8 +45,6 @@ if (isset($_POST['submit']))
 SELECT
     path AS oldpath,
     date_available,
-    has_high,
-    tn_ext,
     id
   FROM '.IMAGES_TABLE.'
   WHERE path NOT LIKE \'./upload/%\'
@@ -55,10 +53,6 @@ SELECT
   while ($row = pwg_db_fetch_assoc($result))
   {
     $file_for_md5sum  = $row['oldpath'];
-    if ('true' == $row['has_high'])
-    {
-      $file_for_md5sum = dirname($row['oldpath']).'/pwg_high/'.basename($row['oldpath']);
-    }
     $md5sum = md5_file($file_for_md5sum);
 
     list($year, $month, $day, $hour, $minute, $second) = preg_split('/[^\d]+/', $row['date_available']);
@@ -77,14 +71,7 @@ SELECT
     secure_directory($upload_dir);
 
     $extension = get_extension($row['oldpath']);
-    if (in_array($extension, array('vimeo', 'ytube', 'dm')))
-    {
-      $newfilename = basename($row['oldpath']);
-    }
-    else
-    {
-      $newfilename = $year.$month.$day.$hour.$minute.$second.'-'.substr($md5sum, 0, 8).'.jpg';
-    }
+    $newfilename = $year.$month.$day.$hour.$minute.$second.'-'.substr($md5sum, 0, 8).'.jpg';
 
     $newpath = $upload_dir.'/'.$newfilename;
 
@@ -97,55 +84,7 @@ UPDATE '.IMAGES_TABLE.'
     pwg_query($query);
 
     rename($row['oldpath'], $newpath);
-
-    # high definition
-    if ('true' == $row['has_high'])
-    {
-      $high_dir = $upload_dir.'/pwg_high';
-      
-      if (!is_dir($high_dir))
-      {
-        umask(0000);
-        $recursive = true;
-        if (!@mkdir($high_dir, 0777, $recursive))
-        {
-          echo 'error during "'.$high_dir.'" directory creation';
-          exit();
-        }
-      }
-      
-      rename(
-        dirname($row['oldpath']).'/pwg_high/'.basename($row['oldpath']),
-        $high_dir.'/'.$newfilename
-        );
-    }
-
-    # thumbnail
-    if (!empty($row['tn_ext']))
-    {
-      $tn_dir = $upload_dir.'/thumbnail';
-      
-      if (!is_dir($tn_dir))
-      {
-        umask(0000);
-        $recursive = true;
-        if (!@mkdir($tn_dir, 0777, $recursive))
-        {
-          echo 'error during "'.$tn_dir.'" directory creation';
-          exit();
-        }
-      }
-      
-      $tn_oldname = $conf['prefix_thumbnail'];
-      $tn_oldname.= get_filename_wo_extension(basename($row['oldpath']));
-      $tn_oldname.= '.'.$row['tn_ext'];
-      
-      rename(
-        dirname($row['oldpath']).'/thumbnail/'.$tn_oldname,
-        $tn_dir.'/'.$conf['prefix_thumbnail'].get_filename_wo_extension(basename($newfilename)).'.jpg'
-        );
-    }
-    // break;
+    delete_element_derivatives(array('path' => $row['oldpath']));
   }
 
   $query = '
@@ -153,6 +92,8 @@ UPDATE '.CATEGORIES_TABLE.'
   SET dir = NULL
 ;';
   pwg_query($query);
+
+  array_push($page['infos'], l10n('Information data registered in database'));
 }
 
 
