@@ -21,6 +21,6 @@
 
 $lang['This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.'] = 'Questo plug-in sposta tutte le vostre foto da <em>"galleries"</em> (aggiunte tramite una sincronizzazione) a <em>"upload"</em> e rende gli album esistenti come virtuali';
 $lang['Make sure you have a backup of your <em>"galleries"</em> directory and a dump of your database.'] = 'Assicuratevi di aver creato un backup della cartella <em>"galleries"</em> e una copia del database';
-$lang['Once categories are virtual, you can move them the way you want.'] = 'Una volta gli album vitualizzati, potrete spostarli a vostro gradimento';
+$lang['Once categories are virtual, you can move them the way you want.'] = 'Una volta gli album virtualizzati, potrete spostarli a vostro gradimento';
 $lang['Start to virtualize'] = 'Avviare la virtualizzazione';
 ?>
