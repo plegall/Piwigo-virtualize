@@ -20,8 +20,8 @@
 // | Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, |
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
-$lang['Make sure you have a backup of your <em>"galleries"</em> directory and a dump of your database.'] = 'Sørg for at du har en sikkerhedskopi af dine <em>"gallerier"</em> mappe og en dump af din database.';
-$lang['Once categories are virtual, you can move them the way you want.'] = 'Når kategorierne er virtuelle, kan du flytte dem på den måde du ønsker.';
-$lang['Start to virtualize'] = 'Start med at virtualisere';
-$lang['This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.'] = 'Dette plugin flytter alle dine billeder fra <em>"gallerier"</em> (tilføjet med synkroniseringsprocessen) til <em>"upload"</em> og markér kategorier som virtuelle.';
+$lang['Make sure you have a backup of your <em>"galleries"</em> directory and a dump of your database.'] = 'Sørg for at du har en sikkerhedskopi af din <em>"gallerier"</em>-mappe og et dump af din database.';
+$lang['Once categories are virtual, you can move them the way you want.'] = 'Når kategorierne er virtuelle, kan du flytte dem på den måde, du ønsker.';
+$lang['Start to virtualize'] = 'Begynd virtualisering';
+$lang['This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.'] = 'Dette plugin flytter alle dine fotoer fra <em>"gallerier"</em> (tilføjet med synkroniseringsprocessen) til <em>"upload"</em> og markerer kategorier som virtuelle.';
 ?>
