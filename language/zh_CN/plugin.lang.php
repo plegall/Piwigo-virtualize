@@ -20,8 +20,8 @@
 // | Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, |
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
-$lang['Make sure you have a backup of your <em>"galleries"</em> directory and a dump of your database.'] = '确认你已经对<em>"图库"</em>目录进行了备份、对数据库进行了转储。';
-$lang['Once categories are virtual, you can move them the way you want.'] = '类别为虚拟，你可以按照自己的想法移动';
-$lang['Start to virtualize'] = '开始虚拟';
-$lang['This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.'] = '此插件会把你的所有照片从<em>"图库"</em>（由同步进程添加）移到<em>"上传"</em>然后标记类别为虚拟';
+$lang['Make sure you have a backup of your <em>"galleries"</em> directory and a dump of your database.'] = '请确认您已对<em>"galleries"</em>目录进行了备份，并对数据库进行了转储。';
+$lang['Once categories are virtual, you can move them the way you want.'] = '当分类转为虚拟后，您即可按需移动它们。';
+$lang['Start to virtualize'] = '开始虚拟化';
+$lang['This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.'] = '此插件将把您的所有照片从<em>"galleries"</em>目录（由同步功能所添加）移到<em>"upload"</em>目录，并将所有分类标记为虚拟。';
 ?>
