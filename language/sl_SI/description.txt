@@ -1,0 +1,1 @@
+Naredi navidezne kategorije in premakni slike iz "galerije" v "naloženo".
