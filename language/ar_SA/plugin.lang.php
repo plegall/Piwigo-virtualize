@@ -23,4 +23,5 @@
 $lang['Once categories are virtual, you can move them the way you want.'] = 'عندما تصبح الفئات آفتراضية يمكنك نقلها بالطريقة التي تريد ';
 $lang['Start to virtualize'] = 'بدأ التحول الافتراضي';
 $lang['This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.'] = 'هذا البرنامج يحول جميع الصور من "معرض" (الثي أضيفت مع عملية المزامنة)"تحميل" وتضع علامة على الفئات كآنها آفتراضية ';
+$lang['Make sure you have a backup of your <em>"galleries"</em> directory and a dump of your database.'] = 'تأكد أن لديك نسخة احتياطية من دليل </em> "الرواق"<em>  وتفريغ قاعدة البيانات الخاصة';
 ?>
