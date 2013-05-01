@@ -1,1 +1,1 @@
-G&oslash;r kategorier virtuelle og flyt billeder fra "gallerier" til "Upload billede"
+Gør kategorier virtuelle og flytter billeder fra "galleries" til "upload".
