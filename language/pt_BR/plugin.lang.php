@@ -20,7 +20,7 @@
 // | Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, |
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
-$lang['This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.'] = 'Este plugin move todas as suas fotos de <em> "galerias" </ em> (adicionado com o processo de sincronização) para <em> "upload" </ em> e marca como virtual.';
+$lang['This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.'] = 'Este plugin move todas as suas fotos de <em>"galerias"</em> (adicionado com o processo de sincronização) para <em>"upload"</em> e marca como virtual.';
 $lang['Once categories are virtual, you can move them the way you want.'] = 'Uma vez que categorias são virtuais, você pode movê-las da maneira que quiser.';
 $lang['Start to virtualize'] = 'Iniciar a virtualização';
 $lang['Make sure you have a backup of your <em>"galleries"</em> directory and a dump of your database.'] = 'Certifique-se de que você tem um backup de seu diretório <em> "galerias" </ em> e um dump de seu banco de dados.';
