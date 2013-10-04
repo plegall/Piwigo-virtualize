@@ -1,0 +1,1 @@
+Gjør kategoriene virtuelle, og flytt bilder fra "gallerier" til "opplasting"
