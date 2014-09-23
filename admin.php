@@ -45,6 +45,7 @@ if (isset($_POST['submit']))
 SELECT
     path AS oldpath,
     date_available,
+    representative_ext,
     id
   FROM '.IMAGES_TABLE.'
   WHERE path NOT LIKE \'./upload/%\'
@@ -58,33 +59,41 @@ SELECT
     list($year, $month, $day, $hour, $minute, $second) = preg_split('/[^\d]+/', $row['date_available']);
 
     $upload_dir = './upload/'.$year.'/'.$month.'/'.$day;
-    if (!is_dir($upload_dir))
-    {
-      umask(0000);
-      $recursive = true;
-      if (!@mkdir($upload_dir, 0777, $recursive))
-      {
-        echo 'error during "'.$upload_dir.'" directory creation';
-        exit();
-      }
-    }
-    secure_directory($upload_dir);
+    mkgetdir($upload_dir);
 
+    $newfilename_wo_ext = $year.$month.$day.$hour.$minute.$second.'-'.substr($md5sum, 0, 8);
+    
     $extension = get_extension($row['oldpath']);
-    $newfilename = $year.$month.$day.$hour.$minute.$second.'-'.substr($md5sum, 0, 8).'.jpg';
+    $newfilename = $newfilename_wo_ext.'.'.$extension;
 
     $newpath = $upload_dir.'/'.$newfilename;
 
-    $query = '
+    if (rename($row['oldpath'], $newpath))
+    {
+      if (!empty($row['representative_ext']))
+      {
+        $rep_dir = $upload_dir.'/pwg_representative';
+        mkgetdir($rep_dir);
+        
+        $rep_oldpath = original_to_representative($row['oldpath'], $row['representative_ext']);
+        rename($rep_oldpath, $rep_dir.'/'.$newfilename_wo_ext.'.'.$row['representative_ext']);
+      }
+
+      $query = '
 UPDATE '.IMAGES_TABLE.'
   SET path = \''.$newpath.'\',
       storage_category_id = NULL
   WHERE id = '.$row['id'].'
 ;';
-    pwg_query($query);
+      pwg_query($query);
 
-    rename($row['oldpath'], $newpath);
-    delete_element_derivatives(array('path' => $row['oldpath']));
+      delete_element_derivatives(
+        array(
+          'path' => $row['oldpath'],
+          'representative_ext' => $row['representative_ext'],
+          )
+        );
+    }
   }
 
   $query = '
