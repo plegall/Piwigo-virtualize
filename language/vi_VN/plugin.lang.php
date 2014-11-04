@@ -23,5 +23,4 @@
 $lang['Make sure you have a backup of your <em>"galleries"</em> directory and a dump of your database.'] = 'Hãy đảm bảo bạn đã sao lưu thư mục <em>"galleries"</em> và cơ sở dữ liệu';
 $lang['Once categories are virtual, you can move them the way you want.'] = 'Một khi phân loại là ảo, bạn có thể di chuyển đi bất kỳ đâu';
 $lang['Start to virtualize'] = 'Bắt đầu ảo hóa';
-$lang['This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.'] = 'Plugin này sẽ chuyển tất cả ảnh từ <em>"galleries"</em> (được thêm vào bởi quá trình đồng bộ hóa) đến <em>"upload"</em> và đánh dấu phân loại là ảo.';
-?>
+$lang['This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.'] = 'Tiện ích này sẽ chuyển tất cả ảnh từ <em>"galleries"</em> (được thêm vào bởi quá trình đồng bộ hóa) đến <em>"upload"</em> và đánh dấu phân loại là ảo.';
