@@ -1,0 +1,1 @@
+Tạo các chuyên mục ảo và chuyển hình ảnh từ "thư viện hình" vào "đăng hình"
