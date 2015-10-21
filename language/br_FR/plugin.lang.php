@@ -23,5 +23,4 @@
 $lang['This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.'] = 'Al lugant-mañ a zilec\'h an holl luc\'hskeudennoù eus <em>"galleries"</em> (lakaet en ur sinkronelaat) da <em>"upload"</em>, hag a verk ar rummadoù evel galloudel.';
 $lang['Make sure you have a backup of your <em>"galleries"</em> directory and a dump of your database.'] = 'Gwiriit m\'ho peus ur saveteadenn eus ho kavlec\'h <em>"galleries"</em> hag unan eus ho diaz roadennoù.';
 $lang['Once categories are virtual, you can move them the way you want.'] = 'Ur wech galloudel ar rummadoù, posubl eo deoc\'h dilec\'hiañ anezho evel m\'ho peus c\'hoant.';
-$lang['Start to virtualize'] = 'Kergiñ gant ar galloudeladur';
-?>
+$lang['Start to virtualize'] = 'Kregiñ gant ar galloudeladur';
