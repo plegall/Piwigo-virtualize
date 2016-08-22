@@ -20,9 +20,8 @@
 // | Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, |
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
-$lang['Make sure you have a backup of your <em>"galleries"</em> directory and a dump of your database.'] = 'Zorg ervoor dat je een backup hebt van je <em>"galleries"</em> directory en een dump van je database.';
+$lang['Make sure you have a backup of your <em>"galleries"</em> directory and a dump of your database.'] = 'Zorg ervoor dat je een backup hebt van je <em>"galleries"</em> map  en een dump van je database.';
 $lang['Once categories are virtual, you can move them the way you want.'] = 'Zodra de categorieën virtueel zijn, kun je ze verplaatsen waarheen je wilt.';
 $lang['Start to virtualize'] = 'Begin met virtualiseren';
 $lang['This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.'] = 'Deze plug-in verplaatst al je foto\'s van <em>"galleries"</em> (toegevoegd met het synchronisatieproces) naar <em>"upload"</em> en markeert de categorieën als virtueel.
 ';
-?>
