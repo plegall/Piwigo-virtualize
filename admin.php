@@ -78,6 +78,18 @@ SELECT
         $rep_oldpath = original_to_representative($row['oldpath'], $row['representative_ext']);
         rename($rep_oldpath, $rep_dir.'/'.$newfilename_wo_ext.'.'.$row['representative_ext']);
       }
+      // check for multi-format images
+      $query_ft = 'SELECT 
+              image_id, ext FROM '.IMAGE_FORMAT_TABLE.'
+              WHERE image_id = '.$row['id'].';';
+      $result_ft = pwg_query($query_ft);
+      $format_dir = $upload_dir.'/pwg_format';
+      mkgetdir($format_dir);
+      while ($row_ft = pwg_db_fetch_assoc($result_ft))
+      {
+         $format_oldpath = original_to_format($row['oldpath'], $row_ft['ext']);
+         rename($format_oldpath, $format_dir.'/'.$newfilename_wo_ext.'.'.$row_ft['ext']);
+      }
 
       $query = '
 UPDATE '.IMAGES_TABLE.'
