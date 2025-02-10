@@ -36,16 +36,56 @@ load_language('plugin.lang', dirname(__FILE__).'/');
 check_status(ACCESS_ADMINISTRATOR);
 
 // +-----------------------------------------------------------------------+
-// |                            add permissions                            |
+// | Functions                                                             |
+// +-----------------------------------------------------------------------+
+
+/**
+ * list all columns of each given table
+ *
+ * @return array of array
+ */
+function virtualize_get_columns_of($tables)
+{
+  $columns_of = array();
+
+  foreach ($tables as $table)
+  {
+    $query = '
+DESC `'.$table.'`
+;';
+    $result = pwg_query($query);
+
+    $columns_of[$table] = array();
+
+    while ($row = pwg_db_fetch_row($result))
+    {
+      $columns_of[$table][] = $row[0];
+    }
+  }
+
+  return $columns_of;
+}
+
+// +-----------------------------------------------------------------------+
+// | Virtualize files                                                      |
 // +-----------------------------------------------------------------------+
 
 if (isset($_POST['submit']))
 {
+  $columns_of = virtualize_get_columns_of(array(IMAGES_TABLE));
+
+  $md5sum_colname = 'md5sum';
+  if (isset($columns_of[IMAGES_TABLE]['md5sum_original']))
+  {
+    $md5sum_colname = 'md5sum_original';
+  }
+
   $query = '
 SELECT
     path AS oldpath,
     date_available,
     representative_ext,
+    '.$md5sum_colname.' AS checksum,
     id
   FROM '.IMAGES_TABLE.'
   WHERE path NOT LIKE \'./upload/%\'
@@ -53,20 +93,44 @@ SELECT
   $result = pwg_query($query);
   while ($row = pwg_db_fetch_assoc($result))
   {
+    if (!file_exists($row['oldpath']))
+    {
+      fatal_error('photo #'.$row['id'].' file '.$row['oldpath'].' is missing');
+    }
+
     $file_for_md5sum  = $row['oldpath'];
-    $md5sum = md5_file($file_for_md5sum);
+
+    $md5sum = $row['checksum'];
+
+    if (strlen($md5sum ?? '') != 32)
+    {
+      $md5sum = md5_file($file_for_md5sum);
+    }
+
+    if (empty($md5sum))
+    {
+      fatal_error('photo #'.$row['id'].' file '.$row['oldpath'].', md5sum is empty');
+    }
 
     list($year, $month, $day, $hour, $minute, $second) = preg_split('/[^\d]+/', $row['date_available']);
 
     $upload_dir = './upload/'.$year.'/'.$month.'/'.$day;
     mkgetdir($upload_dir);
 
-    $newfilename_wo_ext = $year.$month.$day.$hour.$minute.$second.'-'.substr($md5sum, 0, 8);
-    
     $extension = get_extension($row['oldpath']);
-    $newfilename = $newfilename_wo_ext.'.'.$extension;
 
+    $newfilename_wo_ext = $year.$month.$day.$hour.$minute.$second.'-'.substr($md5sum, 0, 8);
+    $newfilename = $newfilename_wo_ext.'.'.$extension;
     $newpath = $upload_dir.'/'.$newfilename;
+
+    while (file_exists($newpath))
+    {
+      // if the file already exists (same file from different "galleries" directories, added during the same sync)
+      // we fake a new random string. We do not want to have 2 images sharing the same path
+      $newfilename_wo_ext = preg_replace('/-[a-f0-9]{8}/', '-'.substr(md5(random_bytes(1000)), 0, 8), $newfilename_wo_ext);
+      $newfilename = $newfilename_wo_ext.'.'.$extension;
+      $newpath = $upload_dir.'/'.$newfilename;
+    }
 
     if (rename($row['oldpath'], $newpath))
     {
@@ -79,13 +143,22 @@ SELECT
         rename($rep_oldpath, $rep_dir.'/'.$newfilename_wo_ext.'.'.$row['representative_ext']);
       }
 
-      $query = '
-UPDATE '.IMAGES_TABLE.'
-  SET path = \''.$newpath.'\',
-      storage_category_id = NULL
-  WHERE id = '.$row['id'].'
-;';
-      pwg_query($query);
+      $datas = array(
+        'path' => $newpath,
+        'storage_category_id' => null,
+        $md5sum_colname => $md5sum,
+      );
+
+      if (isset($columns_of[IMAGES_TABLE]['md5sum_fs']))
+      {
+        $datas['md5sum_fs'] = $md5sum;
+      }
+
+      single_update(
+        IMAGES_TABLE,
+        $datas,
+        array('id' => $row['id'])
+      );
 
       delete_element_derivatives(
         array(
