@@ -74,18 +74,12 @@ if (isset($_POST['submit']))
 {
   $columns_of = virtualize_get_columns_of(array(IMAGES_TABLE));
 
-  $md5sum_colname = 'md5sum';
-  if (isset($columns_of[IMAGES_TABLE]['md5sum_original']))
-  {
-    $md5sum_colname = 'md5sum_original';
-  }
-
   $query = '
 SELECT
     path AS oldpath,
     date_available,
     representative_ext,
-    '.$md5sum_colname.' AS checksum,
+    md5sum,
     id
   FROM '.IMAGES_TABLE.'
   WHERE path NOT LIKE \'./upload/%\'
@@ -100,7 +94,7 @@ SELECT
 
     $file_for_md5sum  = $row['oldpath'];
 
-    $md5sum = $row['checksum'];
+    $md5sum = $row['md5sum'];
 
     if (strlen($md5sum ?? '') != 32)
     {
@@ -146,10 +140,10 @@ SELECT
       $datas = array(
         'path' => $newpath,
         'storage_category_id' => null,
-        $md5sum_colname => $md5sum,
+        'md5sum' => $md5sum,
       );
 
-      if (isset($columns_of[IMAGES_TABLE]['md5sum_fs']))
+      if (in_array('md5sum_fs', $columns_of[IMAGES_TABLE]))
       {
         $datas['md5sum_fs'] = $md5sum;
       }
