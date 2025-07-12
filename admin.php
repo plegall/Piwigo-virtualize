@@ -58,8 +58,27 @@ SELECT
   WHERE path NOT LIKE \'./upload/%\'
     AND md5sum IS NOT NULL
 ;';
-  $result = pwg_query($query);
-  while ($row = pwg_db_fetch_assoc($result))
+  $images = query2array($query, 'id');
+
+  $formats_of = array();
+  if (count($images) > 0)
+  {
+    $query = '
+SELECT
+    image_id,
+    ext
+  FROM '.IMAGE_FORMAT_TABLE.'
+  WHERE image_id IN ('.implode(',', array_keys($images)).')
+;';
+    $formats = query2array($query);
+
+    foreach ($formats as $format)
+    {
+      @$formats_of[ $format['image_id'] ][ $format['ext'] ] = 1;
+    }
+  }
+
+  foreach ($images as $row)
   {
     if (!file_exists($row['oldpath']))
     {
@@ -100,6 +119,20 @@ SELECT
         
         $rep_oldpath = original_to_representative($row['oldpath'], $row['representative_ext']);
         rename($rep_oldpath, $rep_dir.'/'.$newfilename_wo_ext.'.'.$row['representative_ext']);
+      }
+
+      if (isset($formats_of[ $row['id'] ]))
+      {
+        $element_info = array('path' => $row['oldpath']);
+
+        $format_dir = $upload_dir.'/pwg_format';
+        mkgetdir($format_dir);
+
+        foreach ($formats_of[ $row['id'] ] as $format_ext => $one)
+        {
+          $format_oldpath = original_to_format(get_element_path($element_info), $format_ext);
+          rename($format_oldpath, $format_dir.'/'.$newfilename_wo_ext.'.'.$format_ext);
+        }
       }
 
       $datas = array(
