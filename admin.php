@@ -39,40 +39,13 @@ check_status(ACCESS_ADMINISTRATOR);
 // | Functions                                                             |
 // +-----------------------------------------------------------------------+
 
-/**
- * list all columns of each given table
- *
- * @return array of array
- */
-function virtualize_get_columns_of($tables)
-{
-  $columns_of = array();
-
-  foreach ($tables as $table)
-  {
-    $query = '
-DESC `'.$table.'`
-;';
-    $result = pwg_query($query);
-
-    $columns_of[$table] = array();
-
-    while ($row = pwg_db_fetch_row($result))
-    {
-      $columns_of[$table][] = $row[0];
-    }
-  }
-
-  return $columns_of;
-}
-
 // +-----------------------------------------------------------------------+
 // | Virtualize files                                                      |
 // +-----------------------------------------------------------------------+
 
 if (isset($_POST['submit']))
 {
-  $columns_of = virtualize_get_columns_of(array(IMAGES_TABLE));
+  $nb_virtualized = 0;
 
   $query = '
 SELECT
@@ -83,6 +56,7 @@ SELECT
     id
   FROM '.IMAGES_TABLE.'
   WHERE path NOT LIKE \'./upload/%\'
+    AND md5sum IS NOT NULL
 ;';
   $result = pwg_query($query);
   while ($row = pwg_db_fetch_assoc($result))
@@ -92,18 +66,9 @@ SELECT
       fatal_error('photo #'.$row['id'].' file '.$row['oldpath'].' is missing');
     }
 
-    $file_for_md5sum  = $row['oldpath'];
-
-    $md5sum = $row['md5sum'];
-
-    if (strlen($md5sum ?? '') != 32)
+    if (!preg_match('/^[a-f0-9]{32}$/', $row['md5sum']))
     {
-      $md5sum = md5_file($file_for_md5sum);
-    }
-
-    if (empty($md5sum))
-    {
-      fatal_error('photo #'.$row['id'].' file '.$row['oldpath'].', md5sum is empty');
+      fatal_error('photo #'.$row['id'].' file '.$row['oldpath'].', md5sum "'.$row['md5sum'].'" is invalid');
     }
 
     list($year, $month, $day, $hour, $minute, $second) = preg_split('/[^\d]+/', $row['date_available']);
@@ -113,7 +78,7 @@ SELECT
 
     $extension = get_extension($row['oldpath']);
 
-    $newfilename_wo_ext = $year.$month.$day.$hour.$minute.$second.'-'.substr($md5sum, 0, 8);
+    $newfilename_wo_ext = $year.$month.$day.$hour.$minute.$second.'-'.substr($row['md5sum'], 0, 8);
     $newfilename = $newfilename_wo_ext.'.'.$extension;
     $newpath = $upload_dir.'/'.$newfilename;
 
@@ -121,7 +86,7 @@ SELECT
     {
       // if the file already exists (same file from different "galleries" directories, added during the same sync)
       // we fake a new random string. We do not want to have 2 images sharing the same path
-      $newfilename_wo_ext = preg_replace('/-[a-f0-9]{8}/', '-'.substr(md5(random_bytes(1000)), 0, 8), $newfilename_wo_ext);
+      $newfilename_wo_ext = preg_replace('/-[a-f0-9]{8}/', '-'.substr(md5(random_bytes(5)), 0, 8), $newfilename_wo_ext);
       $newfilename = $newfilename_wo_ext.'.'.$extension;
       $newpath = $upload_dir.'/'.$newfilename;
     }
@@ -140,13 +105,7 @@ SELECT
       $datas = array(
         'path' => $newpath,
         'storage_category_id' => null,
-        'md5sum' => $md5sum,
       );
-
-      if (in_array('md5sum_fs', $columns_of[IMAGES_TABLE]))
-      {
-        $datas['md5sum_fs'] = $md5sum;
-      }
 
       single_update(
         IMAGES_TABLE,
@@ -160,16 +119,36 @@ SELECT
           'representative_ext' => $row['representative_ext'],
           )
         );
+
+      $nb_virtualized++;
     }
   }
+
+  // find "physical" categories with no more "physical" files inside
+  $query = '
+SELECT
+    storage_category_id
+  FROM '.IMAGES_TABLE.'
+  WHERE storage_category_id IS NOT NULL
+;';
+  $storage_category_ids = query2array($query);
 
   $query = '
 UPDATE '.CATEGORIES_TABLE.'
   SET dir = NULL
+  WHERE dir IS NOT NULL';
+
+  if (count($storage_category_ids) > 0)
+  {
+    $query.= '
+    AND id NOT IN ('.implode(',', $storage_category_ids).')';
+  }
+
+  $query.= '
 ;';
   pwg_query($query);
 
-  array_push($page['infos'], l10n('Information data registered in database'));
+  array_push($page['infos'], l10n('%d photos have been virtualized', $nb_virtualized));
 }
 
 
@@ -185,9 +164,60 @@ $template->set_filenames(
 
 $template->assign(
     array(
+      'ADMIN_PAGE_TITLE' => 'Virtualize',
       'F_ADD_ACTION'=> $admin_base_url,
     )
   );
+
+$show_virtualize_button = false;
+
+if (!isset($_POST['submit']))
+{
+  // check if there are photos to virtualize : if none, just display a $page['infos'] "all is already virtual, you're good to go :-)"
+  $query = '
+SELECT
+    md5sum
+  FROM '.IMAGES_TABLE.'
+  WHERE path NOT LIKE \'./upload/%\'
+;';
+  $candidates = query2array($query);
+  $nb_candidates_wo_md5sum = 0;
+  foreach ($candidates as $candidate)
+  {
+    if (empty($candidate['md5sum']))
+    {
+      $nb_candidates_wo_md5sum++;
+    }
+  }
+
+  if (count($candidates) == 0)
+  {
+    $page['infos'][] = l10n('nothing to virtualize, all is already virtual, you\'re good to go :-)');
+  }
+  else
+  {
+    $show_virtualize_button = true;
+    $page['messages'][] = l10n('you have %d photos to virtualize', count($candidates));
+
+    if ($nb_candidates_wo_md5sum > 0)
+    {
+      $show_virtualize_button = false;
+
+      $msg = l10n('%d photos to virtualize have no checksum yet...', $nb_candidates_wo_md5sum);
+      $msg.= ' <a href="admin.php?page=batch_manager&amp;filter=prefilter-no_sync_md5sum">'.l10n('Compute them first in the batch manager').' <i class="icon-right"></i></a>';
+
+      $page['warnings'][] = $msg;
+    }
+
+    $page['messages'][] = l10n('This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.');
+    $page['messages'][] = l10n('Once categories are virtual, you can move them the way you want.');
+
+    $page['warnings'][] = l10n('Make sure you have a backup of your <em>"galleries"</em> directory and a dump of your database.');
+  }
+  // check formats
+}
+
+$template->assign('show_virtualize_button', $show_virtualize_button);
 
 // +-----------------------------------------------------------------------+
 // |                           sending html code                           |
