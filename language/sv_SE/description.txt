@@ -1,1 +1,1 @@
-Gör kategorier virtuella och flytta bilder från "gallerier"till "upload"
+Gör kategorier virtuella och flytta foton från "gallerier" till "ladda upp"
