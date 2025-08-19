@@ -23,4 +23,8 @@ $lang['This plugin moves all your photos from <em>"galleries"</em> (added with t
 $lang['Make sure you have a backup of your <em>"galleries"</em> directory and a dump of your database.'] = 'Uistite sa, že máte vytvorenú zálohu z Vašich <em>"galériových"</em> adresárov a Vašej databázy.';
 $lang['Once categories are virtual, you can move them the way you want.'] = 'Keď sú kategórie virtuálne, môžete ich presunúť kam chcete.';
 $lang['Start to virtualize'] = 'Štart virtualizácie';
-?>
+$lang['%d photos have been virtualized'] = '%d fotografií bolo virtualizovaných';
+$lang['%d photos to virtualize have no checksum yet...'] = '%d fotografie na virtualizáciu ešte nemajú kontrolný súčet...';
+$lang['Compute them first in the batch manager'] = 'Vypočítajte ich najprv v správcovi dávok';
+$lang['nothing to virtualize, all is already virtual, you\'re good to go :-)'] = 'nie je čo virtualizovať, všetko je už virtuálne, môžete ísť :-)';
+$lang['you have %d photos to virtualize'] = 'máte %d fotografií na virtualizáciu';
