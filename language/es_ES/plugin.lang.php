@@ -23,4 +23,8 @@ $lang['This plugin moves all your photos from <em>"galleries"</em> (added with t
 $lang['Make sure you have a backup of your <em>"galleries"</em> directory and a dump of your database.'] = 'Asegúrese de disponer de una copia de seguridad del directorio <em>"galleries"</em>, así como de un volcado de la base de datos.';
 $lang['Once categories are virtual, you can move them the way you want.'] = 'Una vez sus categorías son virtuales, puede moverlas del modo que desee.';
 $lang['Start to virtualize'] = 'Iniciar la virtualización';
-?>
+$lang['%d photos have been virtualized'] = 'Se han virtualizado %d fotos';
+$lang['%d photos to virtualize have no checksum yet...'] = '%d fotos pendientes de virtualizar aún no tienen suma de comprobación';
+$lang['Compute them first in the batch manager'] = 'Calcúlelas antes en la gestión de lotes';
+$lang['nothing to virtualize, all is already virtual, you\'re good to go :-)'] = 'No hay nada que virtualizar, todo es ya virtual, misión cumplida :-)';
+$lang['you have %d photos to virtualize'] = 'Tiene %d fotos por virtualizar';
