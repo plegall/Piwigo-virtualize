@@ -24,4 +24,8 @@ $lang['Make sure you have a backup of your <em>"galleries"</em> directory and a 
 $lang['Once categories are virtual, you can move them the way you want.'] = 'Kategoriler sanal olduğunda istediğiniz şekilde taşıyabilirsiniz.';
 $lang['Start to virtualize'] = 'Sanallaştırma başlat';
 $lang['This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.'] = 'Bu eklenti <em>"galleries"</em> \'deki tüm fotoğraflarınızı (senkronizasyon işlemi ile eklenen) <em>"upload"</em> \'e taşır ve kategorileri sanal olarak işaretler.';
-?>
+$lang['%d photos have been virtualized'] = '%d fotoğraf sanallaştırıldı';
+$lang['%d photos to virtualize have no checksum yet...'] = 'Sanallaştırılacak %d fotoğrafın henüz bir denetim toplamı yok...';
+$lang['Compute them first in the batch manager'] = 'Bunları önce toplu iş yöneticisinde hesapla';
+$lang['nothing to virtualize, all is already virtual, you\'re good to go :-)'] = 'sanallaştırılacak bir şey yok, her şey zaten sanal, devam et :-)';
+$lang['you have %d photos to virtualize'] = 'sanallaştırılacak %d fotoğrafınız var';
