@@ -26,4 +26,8 @@ $lang['Start to virtualize'] = 'Start virtualisering';
 $lang['Once categories are virtual, you can move them the way you want.'] = 'Når kategoriene er virtuelle, kan du flytte dem hvordan du vil.
 ';
 $lang['Make sure you have a backup of your <em>"galleries"</em> directory and a dump of your database.'] = 'Kontroller att du har en sikkerhetskopi av din <em>"gallerier"</em> katalog og en dump av databasen.';
-?>
+$lang['%d photos to virtualize have no checksum yet...'] = '%d bilder som skal virtualiseres har ingen kontrollsum ennå...';
+$lang['Compute them first in the batch manager'] = 'Beregn dem først i batchbehandleren';
+$lang['nothing to virtualize, all is already virtual, you\'re good to go :-)'] = 'ingenting å virtualisere, alt er allerede virtuelt, du er klar :-)';
+$lang['you have %d photos to virtualize'] = 'du har %d bilder å virtualisere';
+$lang['%d photos have been virtualized'] = '%d bilder har blitt virtualisert';
