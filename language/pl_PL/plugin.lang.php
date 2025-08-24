@@ -24,4 +24,8 @@ $lang['Make sure you have a backup of your <em>"galleries"</em> directory and a 
 $lang['Once categories are virtual, you can move them the way you want.'] = 'Od momentu utworzenia kategorii wirtualnych, możesz je dowolnie przenosić';
 $lang['Start to virtualize'] = 'Rozpocznij wirtualizację';
 $lang['This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.'] = 'Ta wtyczka przenosi Twoje zdjęcia z katalogu <em>"galleries"</em> (dodanych poprzez proces synchronizacji) do katalogu <em>"upload"</em> i zaznacza kategorię jako wirtualną';
-?>
+$lang['nothing to virtualize, all is already virtual, you\'re good to go :-)'] = 'nic do wirtualizacji, wszystko jest już wirtualne, możesz przejść dalej:-)';
+$lang['you have %d photos to virtualize'] = 'masz %d zdjęć do wirtualizacji';
+$lang['%d photos have been virtualized'] = '%d zdjęć zostało zwirtualizowanych';
+$lang['%d photos to virtualize have no checksum yet...'] = '%d zdjęć do wirtualizacji nie ma jeszcze sumy kontrolnej...';
+$lang['Compute them first in the batch manager'] = 'Oblicz je najpierw w menedżerze wsadowym';
