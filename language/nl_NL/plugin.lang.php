@@ -25,3 +25,8 @@ $lang['Once categories are virtual, you can move them the way you want.'] = 'Zod
 $lang['Start to virtualize'] = 'Begin met virtualiseren';
 $lang['This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.'] = 'Deze plug-in verplaatst al je foto\'s van <em>"galleries"</em> (toegevoegd met het synchronisatieproces) naar <em>"upload"</em> en markeert de categorieën als virtueel.
 ';
+$lang['%d photos have been virtualized'] = '%d foto’s zijn gevirtualiseerd';
+$lang['%d photos to virtualize have no checksum yet...'] = '%d foto’s die virtualiseerd moeten worden, hebben nog geen checksum…';
+$lang['Compute them first in the batch manager'] = 'Bereken ze eerst in de batchmanager';
+$lang['nothing to virtualize, all is already virtual, you\'re good to go :-)'] = 'Niets te virtualiseren, alles is al gevirtualiseerd, je bent klaar om te gaan :-)';
+$lang['you have %d photos to virtualize'] = 'Je hebt %d foto’s te virtualiseren';
