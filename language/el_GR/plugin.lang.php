@@ -24,4 +24,8 @@ $lang['Make sure you have a backup of your <em>"galleries"</em> directory and a 
 $lang['Once categories are virtual, you can move them the way you want.'] = 'Μόλις κατηγορίες αυτές γίνουν εικονικές, μπορείτε να τις μετακινήσετε όπου θέλετε.';
 $lang['Start to virtualize'] = 'Ξεκινήστε να εικονοποίηση';
 $lang['This plugin moves all your photos from <em>"galleries"</em> (added with the synchronization process) to <em>"upload"</em> and mark categories as virtual.'] = 'Αυτό το πρόσθετο μετακινεί όλες τις φωτογραφίες σας από το <em>"γκαλερί"</em> (που προστίθεται με τη διαδικασία συγχρονισμού) στο <em>"ανέβασμα"</em> και μαρκάρει τις κατηγορίες ως εικονικές (virtual).';
-?>
+$lang['%d photos have been virtualized'] = '%d φωτογραφίες εικονοποιήθηκαν';
+$lang['%d photos to virtualize have no checksum yet...'] = '%d φωτογραφίες για εικονοποίηση δεν έχουν ακόμη άθροισμα ελέγχου...';
+$lang['Compute them first in the batch manager'] = 'Υπολογίστε τις πρώτα στον διαχειριστή συνεχούς επεξεργασίας';
+$lang['nothing to virtualize, all is already virtual, you\'re good to go :-)'] = 'δεν υπάρχει κάτι για εικονοποίηση, όλα είναι ήδη εικονικά, είστε έτοιμοι :-)';
+$lang['you have %d photos to virtualize'] = 'έχετε %d φωτογραφίες για εικονοποίηση';
